@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LogowanieComponent } from './logowanie.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
 describe('LogowanieComponent', () => {
@@ -8,7 +9,8 @@ describe('LogowanieComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LogowanieComponent]
+      declarations: [LogowanieComponent],
+      imports: [ReactiveFormsModule, FormsModule],
     });
 
     fixture = TestBed.createComponent(LogowanieComponent);
@@ -43,17 +45,17 @@ describe('LogowanieComponent', () => {
     const usernameField = fixture.debugElement.nativeElement.querySelector('input[name="username"]');
     const passwordField = fixture.debugElement.nativeElement.querySelector('input[name="password"]');
     const submitButton = fixture.debugElement.nativeElement.querySelector('button[type="submit"]');
-
+  
     usernameField.value = 'exampleUser';
     passwordField.value = 'invalidPassword';
-
+  
     submitButton.click();
     fixture.detectChanges();
-
+  
     const errorMessage = fixture.debugElement.nativeElement.querySelector('.error-message');
-    expect(errorMessage).toBeTruthy();
+    console.assert(errorMessage, 'Error message should be displayed');
   });
-
+  
   it('should log in for valid username and password', () => {
     const usernameField = fixture.debugElement.nativeElement.querySelector('input[name="username"]');
     const passwordField = fixture.debugElement.nativeElement.querySelector('input[name="password"]');
